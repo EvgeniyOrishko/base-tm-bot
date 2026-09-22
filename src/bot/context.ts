@@ -7,7 +7,8 @@ import type { ParseModeFlavor } from '@grammyjs/parse-mode'
 import type { Context as DefaultContext, SessionFlavor } from 'grammy'
 
 export interface SessionData {
-  // field?: string;
+  // Deep link payload from /start (e.g. `site` for t.me/<bot>?start=site)
+  source?: string
 }
 
 interface ExtendedContextFlavor {

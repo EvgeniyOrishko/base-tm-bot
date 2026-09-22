@@ -8,6 +8,12 @@ const baseConfigSchema = v.object({
   botToken: v.pipe(v.string(), v.regex(/^\d+:[\w-]+$/, 'Invalid token')),
   botAllowedUpdates: v.optional(v.pipe(v.string(), v.transform(JSON.parse), v.array(v.picklist(API_CONSTANTS.ALL_UPDATE_TYPES))), '[]'),
   botAdmins: v.optional(v.pipe(v.string(), v.transform(JSON.parse), v.array(v.number())), '[]'),
+  // ID of the group users are invited to after pressing "Start" (e.g. -1001234567890)
+  groupChatId: v.pipe(v.string(), v.transform(Number), v.number(), v.integer()),
+  // Video sent after pressing "Start": Telegram file_id or public HTTPS URL
+  welcomeVideo: v.pipe(v.string(), v.minLength(1)),
+  // Lifetime of the personal invite link, in seconds
+  inviteLinkTtl: v.optional(v.pipe(v.string(), v.transform(Number), v.number(), v.integer(), v.minValue(60)), '86400'),
 })
 
 const configSchema = v.variant('botMode', [

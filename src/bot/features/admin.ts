@@ -18,4 +18,9 @@ feature.command(
   setCommandsHandler,
 )
 
+// Send a video to the bot to get its file_id for the WELCOME_VIDEO env variable
+feature.on(':video', logHandle('admin-video-file-id'), (ctx) => {
+  return ctx.reply(`<code>${ctx.msg.video.file_id}</code>`)
+})
+
 export { composer as adminFeature }

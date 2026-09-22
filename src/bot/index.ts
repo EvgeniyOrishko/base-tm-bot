@@ -1,4 +1,4 @@
-import type { Context } from '#root/bot/context.js'
+import type { Context, SessionData } from '#root/bot/context.js'
 import type { Config } from '#root/config.js'
 import type { Logger } from '#root/logger.js'
 import type { BotConfig } from 'grammy'
@@ -56,7 +56,7 @@ export function createBot(token: string, dependencies: Dependencies, botConfig?:
   protectedBot.use(hydrate())
   protectedBot.use(session({
     getSessionKey,
-    storage: new MemorySessionStorage(),
+    storage: new MemorySessionStorage<SessionData>(),
   }))
   protectedBot.use(i18n)
 
